@@ -1,0 +1,7 @@
+action.package=org.domain.service-sms.session
+action.sources=/service-sms/src
+eclipse.preferences.version=1
+model.package=org.domain.service-sms.entity
+model.sources=/service-sms/src
+test.package=org.domain.service-sms.test
+test.sources=/service-sms/src
