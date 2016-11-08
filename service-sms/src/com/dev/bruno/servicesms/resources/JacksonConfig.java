@@ -1,4 +1,4 @@
-package com.dev.bruno.servicesms.resource;
+package com.dev.bruno.servicesms.resources;
 
 import java.text.SimpleDateFormat;
 

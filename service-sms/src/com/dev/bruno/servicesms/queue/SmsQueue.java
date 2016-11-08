@@ -62,7 +62,7 @@ public class SmsQueue {
 		}
 	}
 	
-	public void add(SmsDTO dto) throws Exception {
+	public void send(SmsDTO dto) throws Exception {
 		if(dto != null) {
 			GsonBuilder builder = new GsonBuilder();
 			builder.setDateFormat("yyyy-MM-dd'T'HH:mm:ss");
