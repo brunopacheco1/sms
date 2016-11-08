@@ -1,6 +1,9 @@
 package com.dev.bruno.servicesms.dto;
 
 import java.io.Serializable;
+import java.util.Date;
+
+import javax.persistence.Column;
 
 public class SmsDTO implements Serializable {
 
@@ -13,6 +16,12 @@ public class SmsDTO implements Serializable {
 	private String to;
 	
 	private String body;
+	
+	private Date validDate;
+	
+	private Date sentDate;
+	
+	private Date invalidationDate;
 
 	public Long getId() {
 		return id;
@@ -44,5 +53,29 @@ public class SmsDTO implements Serializable {
 
 	public void setBody(String body) {
 		this.body = body;
+	}
+
+	public Date getValidDate() {
+		return validDate;
+	}
+
+	public void setValidDate(Date validDate) {
+		this.validDate = validDate;
+	}
+
+	public Date getSentDate() {
+		return sentDate;
+	}
+
+	public void setSentDate(Date sentDate) {
+		this.sentDate = sentDate;
+	}
+
+	public Date getInvalidationDate() {
+		return invalidationDate;
+	}
+
+	public void setInvalidationDate(Date invalidationDate) {
+		this.invalidationDate = invalidationDate;
 	}
 }

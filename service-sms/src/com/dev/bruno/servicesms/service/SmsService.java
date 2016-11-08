@@ -1,6 +1,7 @@
 package com.dev.bruno.servicesms.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -60,22 +61,16 @@ public class SmsService {
 		return entityToDTO(dao.get(id));
 	}
 	
-	public SmsDTO add(SmsDTO dto) throws Exception {
-		validate(null, dto);
+	public void send(SmsDTO dto) throws Exception {
+		Sms sms = dtoToEntity(null, null, dto);
 		
-		Sms entity = dtoToEntity(null, null, dto);
-		
-		dao.add(entity);
-		
-		return entityToDTO(entity);
-	}
-	
-	private void validate(Long id, SmsDTO dto) throws Exception {
-		if(id != null && !dao.exists(id)) {
-			throw new Exception("Sms[" + id + "] não encontrado.");
+		if(sms.getValidDate() != null && sms.getValidDate().before(new Date())) {
+			sms.setInvalidationDate(new Date());
+		} else {
+			sms.setSentDate(new Date());
 		}
 		
-		dto.setId(id);
+		dao.add(sms);
 	}
 	
 	private SmsDTO entityToDTO(Sms sms) throws Exception {

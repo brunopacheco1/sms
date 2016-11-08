@@ -1,6 +1,7 @@
 package com.dev.bruno.servicesms.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,6 +29,15 @@ public class Sms implements Serializable {
 	
 	@Column(name="_BODY", nullable=false, length=160)
 	private String body;
+	
+	@Column(name="_VALID_DATE")
+	private Date validDate;
+	
+	@Column(name="_SENT_DATE")
+	private Date sentDate;
+	
+	@Column(name="_INVALIDATION_DATE")
+	private Date invalidationDate;
 
 	public Long getId() {
 		return id;
@@ -60,6 +70,28 @@ public class Sms implements Serializable {
 	public void setBody(String body) {
 		this.body = body;
 	}
-	
-	
+
+	public Date getValidDate() {
+		return validDate;
+	}
+
+	public void setValidDate(Date validDate) {
+		this.validDate = validDate;
+	}
+
+	public Date getSentDate() {
+		return sentDate;
+	}
+
+	public void setSentDate(Date sentDate) {
+		this.sentDate = sentDate;
+	}
+
+	public Date getInvalidationDate() {
+		return invalidationDate;
+	}
+
+	public void setInvalidationDate(Date invalidationDate) {
+		this.invalidationDate = invalidationDate;
+	}
 }
