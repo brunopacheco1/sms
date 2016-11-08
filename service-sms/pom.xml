@@ -43,8 +43,6 @@
 					<webResources>
 						<resource>
 							<directory>${basedir}/WebContent</directory>
-							<!-- Turn on filtering. If you want to filter more files you can use 
-								wildcards like **/*.xml -->
 							<filtering>true</filtering>
 							<includes>
 								<include>WEB-INF/*.xml</include>
