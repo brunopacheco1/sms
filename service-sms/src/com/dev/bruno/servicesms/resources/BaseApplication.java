@@ -15,7 +15,7 @@ public class BaseApplication extends Application {
         beanConfig.setTitle("Serviço de Envio de SMS");
         beanConfig.setDescription("Projeto RESTFul conceito de envio de SMS. Desenvolvido em Java, utilizando a especificação JavaEE 7 (JAX-RS, EJB e JPA).");
         beanConfig.setSchemes(new String[]{"http"});
-        beanConfig.setHost("ec2-54-92-181-133.compute-1.amazonaws.com");
+        beanConfig.setHost("ec2-54-167-228-148.compute-1.amazonaws.com");
         beanConfig.setBasePath("/api");
         beanConfig.setResourcePackage("com.dev.bruno.servicesms.resources");
         beanConfig.setScan(true);
