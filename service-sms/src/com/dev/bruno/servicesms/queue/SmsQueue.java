@@ -15,8 +15,6 @@ import javax.ejb.Singleton;
 
 import com.dev.bruno.servicesms.dto.SentSmsDTO;
 import com.dev.bruno.servicesms.dto.SmsDTO;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -65,10 +63,9 @@ public class SmsQueue {
 	
 	public void send(SentSmsDTO dto) throws Exception {
 		if(dto != null) {
-			GsonBuilder builder = new GsonBuilder();
-			builder.setDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-			
-			channel.basicPublish("", queue, null, builder.create().toJson(dto).getBytes());
+		    ObjectMapper mapper = JacksonConfig.getObjectMapper();
+		
+		    channel.basicPublish("", queue, null, mapper.writeValueAsString(dto).getBytes());
 		}
 	}
 }

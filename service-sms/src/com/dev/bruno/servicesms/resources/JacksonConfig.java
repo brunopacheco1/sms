@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Produces(MediaType.APPLICATION_JSON)
 public class JacksonConfig implements ContextResolver<ObjectMapper> {
 
-	private ObjectMapper objectMapper;
+	private static ObjectMapper objectMapper;
 
 	public JacksonConfig() throws Exception {
 		objectMapper = new ObjectMapper();
@@ -23,6 +23,10 @@ public class JacksonConfig implements ContextResolver<ObjectMapper> {
 	@Override
 	public ObjectMapper getContext(Class<?> arg0) {
 		return objectMapper;
+	}
+	
+	public static ObjectMapper getObjectMapper() {
+	    return objectMapper;
 	}
 
 }

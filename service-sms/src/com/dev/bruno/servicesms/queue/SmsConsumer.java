@@ -8,7 +8,6 @@ import com.dev.bruno.servicesms.dto.SentSmsDTO;
 import com.dev.bruno.servicesms.dto.SmsDTO;
 import com.dev.bruno.servicesms.service.ServiceLocator;
 import com.dev.bruno.servicesms.service.SmsService;
-import com.google.gson.GsonBuilder;
 import com.rabbitmq.client.AMQP.BasicProperties;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DefaultConsumer;
@@ -26,10 +25,9 @@ public class SmsConsumer extends DefaultConsumer {
 	public void handleDelivery(String consumerTag, Envelope envelope, BasicProperties properties, byte[] body) throws IOException {
 		String message = new String(body, "UTF-8");
 		
-		GsonBuilder builder = new GsonBuilder();
-		builder.setDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		ObjectMapper mapper = JacksonConfig.getObjectMapper();
 		
-		SentSmsDTO dto = builder.create().fromJson(message, SentSmsDTO.class);
+		SentSmsDTO dto =  mapper.readValue(message, SentSmsDTO.class);
 		
 		SmsService smsService = (SmsService) ServiceLocator.getInstance().lookup(SmsService.class);
 		
