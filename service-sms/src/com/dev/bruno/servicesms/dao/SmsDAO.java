@@ -1,8 +1,6 @@
 package com.dev.bruno.servicesms.dao;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -11,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -19,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.dev.bruno.servicesms.model.Sms;
 
+@Stateless
 public class SmsDAO {
 
 	@PersistenceContext
@@ -30,7 +30,6 @@ public class SmsDAO {
 	
 	private Set<String> dirOptions;
 	
-	@SuppressWarnings("unchecked")
 	@PostConstruct
 	private void init() {
 		dirOptions = new HashSet<>();
@@ -38,19 +37,15 @@ public class SmsDAO {
 		dirOptions.add("asc");
 		dirOptions.add("desc");
 		
-		Type t = getClass().getGenericSuperclass();
-        ParameterizedType pt = (ParameterizedType) t;
-        Class<Sms> type = (Class<Sms>) pt.getActualTypeArguments()[0];
-        
         List<Field> fields = new ArrayList<Field>();
         
-		fields.addAll(Arrays.asList(type.getDeclaredFields()));
+		fields.addAll(Arrays.asList(Sms.class.getDeclaredFields()));
 		
 		orderOptions = new HashSet<>();
 		queryOptions = new HashSet<>();
 		
 		for(Field field : fields) {
-			if(field.getType().equals(Long.class) || field.getType().equals(Long.class) || field.getType().equals(Date.class)) {
+			if(field.getType().equals(Integer.class) || field.getType().equals(Long.class) || field.getType().equals(Date.class)) {
 				orderOptions.add(field.getName());
 			} else if(field.getType().equals(String.class)) {
 				orderOptions.add(field.getName());

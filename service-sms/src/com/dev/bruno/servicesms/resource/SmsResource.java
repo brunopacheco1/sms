@@ -19,6 +19,7 @@ import com.dev.bruno.servicesms.service.SmsService;
 
 @Produces(MediaType.APPLICATION_JSON)
 @Stateless
+@Path("/sms")
 public class SmsResource {
 
 	@Inject

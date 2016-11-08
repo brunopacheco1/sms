@@ -1,6 +1,9 @@
 package com.dev.bruno.servicesms.queue;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,11 +38,15 @@ public class SmsQueue {
 	private void connect() {
 		try {
 			ConnectionFactory factory = new ConnectionFactory();
-		    factory.setHost(host);
+		    factory.setUri(host);
 			connection = factory.newConnection();
 			channel = connection.createChannel();
-			channel.queueDeclare(queue, false, false, false, null);
-		} catch (IOException | TimeoutException e) {
+			
+			channel.queueDeclare(queue, true, false, false, null);
+			
+			channel.basicConsume(queue, true, new SmsConsumer(channel));
+			channel.basicConsume(queue, true, new SmsConsumer(channel));
+		} catch (IOException | TimeoutException | KeyManagementException | NoSuchAlgorithmException | URISyntaxException e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
