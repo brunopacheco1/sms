@@ -17,16 +17,16 @@ public class Sms implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ID", nullable=false)
+	@Column(name="_ID", nullable=false)
 	private Long id;
 	
-	@Column(name="FROM", nullable=false, length=20)
+	@Column(name="_FROM", nullable=false, length=20)
 	private String from;
 	
-	@Column(name="TO", nullable=false, length=20)
+	@Column(name="_TO", nullable=false, length=20)
 	private String to;
 	
-	@Column(name="BODY", nullable=false, length=160)
+	@Column(name="_BODY", nullable=false, length=160)
 	private String body;
 
 	public Long getId() {

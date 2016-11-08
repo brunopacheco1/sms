@@ -1,25 +1,25 @@
 package com.dev.bruno.servicesms.response;
 
-public class GenericResponse {
+public class Response {
 
 	protected Boolean success = false;
 	
 	protected String message;
 
-	public GenericResponse(Boolean success, String message) {
+	public Response(Boolean success, String message) {
 		super();
 		
 		this.success = success;
 		this.message = message;
 	}
 	
-	public GenericResponse(Boolean success) {
+	public Response(Boolean success) {
 		super();
 		
 		this.success = success;
 	}
 	
-	public GenericResponse(String message) {
+	public Response(String message) {
 		super();
 		
 		this.message = message;
