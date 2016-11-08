@@ -5,17 +5,14 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.interceptor.Interceptors;
 
 import org.apache.commons.beanutils.PropertyUtils;
 
 import com.dev.bruno.servicesms.dao.SmsDAO;
 import com.dev.bruno.servicesms.dto.ResultDTO;
 import com.dev.bruno.servicesms.dto.SmsDTO;
-import com.dev.bruno.servicesms.interceptor.RequestTimeInterceptor;
 import com.dev.bruno.servicesms.model.Sms;
 
-@Interceptors(RequestTimeInterceptor.class)
 @Stateless
 public class SmsService {
 

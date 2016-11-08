@@ -9,16 +9,13 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import javax.ejb.Singleton;
-import javax.interceptor.Interceptors;
 
 import com.dev.bruno.servicesms.dto.SmsDTO;
-import com.dev.bruno.servicesms.interceptor.RequestTimeInterceptor;
 import com.google.gson.Gson;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 
-@Interceptors(RequestTimeInterceptor.class)
 @Singleton
 public class SmsQueue {
 
