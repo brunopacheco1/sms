@@ -20,6 +20,7 @@ import com.dev.bruno.servicesms.service.SmsService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 @Produces(MediaType.APPLICATION_JSON)
 @Stateless
@@ -35,21 +36,26 @@ public class SmsResource {
 	
 	@GET
 	@ApiOperation(value = "Serviço de listagem de SMS enviados.")
-	public ResultDTO list(@QueryParam("query") String queryStr, @QueryParam("start") Integer start, @QueryParam("limit") Integer limit, @QueryParam("order") String order, @QueryParam("dir") String dir) throws Exception {
+	public ResultDTO list(
+	   @ApiParam(required=false, example="teste", value="Campo de pesquisa textual nos campos: to, from, body") @QueryParam("query") String queryStr, 
+	   @ApiParam(required=false, example="0", defaultValue="0", value="Ponto inicial do resultado da consulta") @QueryParam("start") Integer start,
+	   @ApiParam(required=false, example="100", defaultValue="100", value="Número limite de linhas da consulta") @QueryParam("limit") Integer limit,
+	   @ApiParam(required=false, example="id", defaultValue="id", allowableValues="id,validDate,sentDate,invalidationDate", value="Campo que ordenará a consulta") @QueryParam("order") String order,
+	   @ApiParam(required=false, example="asc", defaultValue="asc", allowableValues="dir,asc", value="\"Direção\" da ordenação da consulta") @QueryParam("dir") String dir) throws Exception {
 		return service.list(queryStr, start, limit, order, dir);
 	}
 	
 	@GET
 	@Path("/{id}")
 	@ApiOperation(value = "Serviço de busca de SMS único")
-	public SmsDTO get(@PathParam("id") Long id) throws Exception {
+	public SmsDTO get(@ApiParam(required=true, example="1", value="ID do SMS") @PathParam("id") Long id) throws Exception {
 		return service.get(id);
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@ApiOperation(value = "Serviço de envio de SMS.")
-	public Response send(SentSmsDTO dto) throws Exception {
+	public Response send(@ApiParam(required=true, value="SMS que será enviado") SentSmsDTO dto) throws Exception {
 		queueService.send(dto);
 		
 		return new Response(true);

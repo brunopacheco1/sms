@@ -1,10 +1,16 @@
 package com.dev.bruno.servicesms.response;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel
 public class Response {
 
-	protected Boolean success = false;
+	@ApiModelProperty(value="Se a requisição foi processada com sucesso ou não.", example="false")
+	private Boolean success = false;
 	
-	protected String message;
+	@ApiModelProperty(value="Mensagem de resposta, caso seja uma excepção", example="Campo não preenchido corretamente.")
+	private String message;
 
 	public Response(Boolean success, String message) {
 		super();

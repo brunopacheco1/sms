@@ -13,7 +13,10 @@ import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import javax.ejb.Singleton;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.dev.bruno.servicesms.dto.SentSmsDTO;
+import com.dev.bruno.servicesms.exception.AppException;
 import com.dev.bruno.servicesms.resources.JacksonConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.Channel;
@@ -63,10 +66,28 @@ public class SmsQueue {
 	}
 	
 	public void send(SentSmsDTO dto) throws Exception {
-		if(dto != null) {
-		    ObjectMapper mapper = JacksonConfig.getObjectMapper();
+	    validate(dto);
+	    
+	    ObjectMapper mapper = JacksonConfig.getObjectMapper();
+	
+	    channel.basicPublish("", queue, null, mapper.writeValueAsString(dto).getBytes());	
+	}
+	
+	private void validate(SentSmsDTO dto) throws AppException {
+	    if(dto == null) {
+	        throw new AppException("SMS é obrigatório.");
+	    }
+	    
+	    if(StringUtils.isBlank(dto.getTo()) || !dto.getTo().matches("^\\+\\d{13}$")) {
+	        throw new AppException("O formato do campo to deve ser o seguinte: ^\\+\\d{13}$. Ex: +5521999112222");
+		}
 		
-		    channel.basicPublish("", queue, null, mapper.writeValueAsString(dto).getBytes());
+		if(StringUtils.isBlank(dto.getFrom()) || !dto.getFrom().matches("^\\+\\d{13}$")) {
+	        throw new AppException("O formato do campo from deve ser o seguinte: ^\\+\\d{13}$. Ex: +5521999112222");
+		}
+		
+		if(StringUtils.isBlank(dto.getBody()) || dto.getBody().length() > 160) {
+	        throw new AppException("O campo body não pode ser maior que 160 carateres.");
 		}
 	}
 }

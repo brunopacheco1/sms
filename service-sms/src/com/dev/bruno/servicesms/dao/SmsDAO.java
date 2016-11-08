@@ -16,6 +16,7 @@ import javax.persistence.TypedQuery;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.dev.bruno.servicesms.exception.AppException;
 import com.dev.bruno.servicesms.model.Sms;
 
 @Stateless
@@ -54,9 +55,9 @@ public class SmsDAO {
 		}
 	}
 	
-	public Sms get(Long id) throws Exception {
+	public Sms get(Long id) throws AppException {
 		if(!exists(id)) {
-			throw new Exception("Sms não encontrado");
+			throw new AppException("Sms não encontrado");
 		}
 		
 		Sms result = manager.find(Sms.class, id);
@@ -64,21 +65,21 @@ public class SmsDAO {
 		return result;
 	}
 
-	public void add(Sms entity) throws Exception {
+	public void add(Sms entity) throws AppException {
 		if(entity == null) {
-			throw new Exception("Sms não encontrado");
+			throw new AppException("Sms não encontrado");
 		}
 		
 		manager.persist(entity);
 	}
 
-	public List<Sms> list(String queryStr, Integer start, Integer limit, String order, String dir) throws Exception {
+	public List<Sms> list(String queryStr, Integer start, Integer limit, String order, String dir) throws AppException {
 		if(start == null || limit == null || order == null || dir == null) {
-			throw new Exception("start, limit, order e dir são obrigatórios");
+			throw new AppException("start, limit, order e dir são obrigatórios");
 		}
 		
 		if(!orderOptions.contains(order) || !dirOptions.contains(dir)) {
-			throw new Exception(String.format("Possíveis valores para order[%s] e dir[%s]", StringUtils.join(orderOptions, ", "), StringUtils.join(dirOptions, ", ")));
+			throw new AppException(String.format("Possíveis valores para order[%s] e dir[%s]", StringUtils.join(orderOptions, ", "), StringUtils.join(dirOptions, ", ")));
 		}
 		
 		StringBuilder hql = new StringBuilder("select s from Sms s where 1=1");
@@ -153,9 +154,9 @@ public class SmsDAO {
 		return query.getSingleResult();
 	}
 	
-	public Boolean exists(Long id) throws Exception {
+	public Boolean exists(Long id) throws AppException {
 		if(id == null) {
-			throw new Exception("id é obrigatório");
+			throw new AppException("id é obrigatório");
 		}
 		
 		Long result = manager.createQuery("select count(s) from Sms s where s.id = :id", Long.class).setParameter("id", id).getSingleResult();

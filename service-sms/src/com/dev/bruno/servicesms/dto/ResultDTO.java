@@ -1,25 +1,36 @@
 package com.dev.bruno.servicesms.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+@ApiModel
 public class ResultDTO implements Serializable {
 
 	private static final long serialVersionUID = -4216175342452534456L;
 
+    @ApiModelProperty(value="Lista de SMS resultante de acordo com start, limit, order e dir definidos")
 	private List<SmsDTO> result = new ArrayList<>();
 
+    @ApiModelProperty(value="Número de SMS de acordo com start, limit, order e dir definidos", example="1")
 	private Long resultSize = 0l;
-	
+
+    @ApiModelProperty(value="Número de SMS total resultante da consulta", example="1")	
 	private Long totalSize = 0l;
-	
+
+    @ApiModelProperty(value="start definido inicialmente na consulta", example="0")	
 	private Integer start;
-	
+
+    @ApiModelProperty(value="limit definido inicialmente na consulta", example="100")		
 	private Integer limit;
 	
+    @ApiModelProperty(value="order definido inicialmente na consulta", example="id")	
 	private String order;
-	
+
+    @ApiModelProperty(value="dir definido inicialmente na consulta", example="asc")		
 	private String dir;
 	
 	public void remove(SmsDTO dto) {

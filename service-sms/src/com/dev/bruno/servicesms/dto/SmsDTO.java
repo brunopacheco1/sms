@@ -1,26 +1,35 @@
 package com.dev.bruno.servicesms.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-
+@ApiModel
 public class SmsDTO implements Serializable {
 
 	private static final long serialVersionUID = 6435974476117737767L;
 
+    @ApiModelProperty(value="ID do SMS", example="1")
 	private Long id;
-	
+
+    @ApiModelProperty(value="Remetente do SMS, no seguinte formato: ^\\+\\d{13}$", example="+5521999112222")
 	private String from;
-	
+
+    @ApiModelProperty(value="Destinatário do SMS, no seguinte formato: ^\\+\\d{13}$", example="+5521999112223")
 	private String to;
-	
+
+    @ApiModelProperty(value="Corpo do SMS, até 160 caracteres", example="teste")
 	private String body;
-	
+
+    @ApiModelProperty(value="Data limite de envio do SMS", example="2016-01-01T00:00:00")
 	private Date validDate;
-	
+
+    @ApiModelProperty(value="Data de envio do SMS", example="2016-01-01T00:00:00")
 	private Date sentDate;
-	
+
+    @ApiModelProperty(value="Data de invalidação do SMS, caso não tenha sido enviado antes da validDate", example="2016-01-01T00:00:00")
 	private Date invalidationDate;
 
 	public Long getId() {
