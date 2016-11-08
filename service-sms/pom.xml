@@ -53,6 +53,17 @@
 					</webResources>
 				</configuration>
 			</plugin>
+			<plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>1.1.0.Alpha11</version>
+                <configuration>
+                    <hostname>ec2-54-92-181-133.compute-1.amazonaws.com</hostname>
+                    <port>9990</port>
+                    <username>ecad</username>
+                    <password>ecad123</password>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
 	<dependencies>
