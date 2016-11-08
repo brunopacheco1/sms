@@ -18,9 +18,8 @@ public class UTF8CORSFilter implements ContainerResponseFilter {
             responseContext.getHeaders().putSingle("Content-Type", contentType + ";charset=utf-8");
         }
         
-        responseContext.getHeaders().putSingle("Access-Control-Expose-Headers", "Content-Location");
 	    responseContext.getHeaders().putSingle("Access-Control-Allow-Origin", "*");
-	    responseContext.getHeaders().putSingle("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS");
-	    responseContext.getHeaders().putSingle("Access-Control-Allow-Headers", "Content-Type, Authorization, Accept-Encoding, USER, NroMatricula, CHAVEREQUISICAO");
+	    responseContext.getHeaders().putSingle("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+	    responseContext.getHeaders().putSingle("Access-Control-Allow-Headers", "Content-Type, Accept-Encoding");
     }
 }
