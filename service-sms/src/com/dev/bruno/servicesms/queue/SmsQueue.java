@@ -14,7 +14,8 @@ import javax.annotation.Resource;
 import javax.ejb.Singleton;
 
 import com.dev.bruno.servicesms.dto.SentSmsDTO;
-import com.dev.bruno.servicesms.dto.SmsDTO;
+import com.dev.bruno.servicesms.resources.JacksonConfig;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;

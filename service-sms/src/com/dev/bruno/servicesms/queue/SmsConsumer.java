@@ -5,9 +5,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.dev.bruno.servicesms.dto.SentSmsDTO;
-import com.dev.bruno.servicesms.dto.SmsDTO;
+import com.dev.bruno.servicesms.resources.JacksonConfig;
 import com.dev.bruno.servicesms.service.ServiceLocator;
 import com.dev.bruno.servicesms.service.SmsService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.AMQP.BasicProperties;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DefaultConsumer;
