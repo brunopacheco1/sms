@@ -15,7 +15,7 @@ public class OperadoraFactoryService {
     private boolean claro = false;
     
     public OperadoraService getOperadora(String to) {
-        if(StringUtils.isBlank(to) || to.matches("^\\+\\d{13}$")) {
+        if(StringUtils.isBlank(to) || !to.matches("^\\+\\d{13}$")) {
             return null;
         }
         
