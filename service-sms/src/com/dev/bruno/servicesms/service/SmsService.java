@@ -21,6 +21,9 @@ public class SmsService {
 	@Inject
 	private SmsDAO dao;
 	
+	@Inject
+	private OperadoraFactoryService operadoraFactory;
+	
 	public ResultDTO list(String queryStr, Integer start, Integer limit, String order, String dir) throws Exception {
 		if(start == null) {
 			start = 0;
@@ -57,7 +60,6 @@ public class SmsService {
 		return result;
 	}
 	
-	
 	public SmsDTO get(Long id) throws Exception {
 		return entityToDTO(dao.get(id));
 	}
@@ -68,7 +70,11 @@ public class SmsService {
 		if(sms.getValidDate() != null && sms.getValidDate().before(new Date())) {
 			sms.setInvalidationDate(new Date());
 		} else {
-			sms.setSentDate(new Date());
+            OperadoraService service = operadoraFactory.getOperadora(dto.getTo());
+            
+            service.send(dto);
+            
+            sms.setSentDate(new Date());
 		}
 		
 		dao.add(sms);
