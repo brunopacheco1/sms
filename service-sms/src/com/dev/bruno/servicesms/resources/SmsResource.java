@@ -12,6 +12,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.dev.bruno.servicesms.dto.ResultDTO;
+import com.dev.bruno.servicesms.dto.SentSmsDTO;
 import com.dev.bruno.servicesms.dto.SmsDTO;
 import com.dev.bruno.servicesms.queue.SmsQueue;
 import com.dev.bruno.servicesms.response.Response;
@@ -23,7 +24,7 @@ import io.swagger.annotations.ApiOperation;
 @Produces(MediaType.APPLICATION_JSON)
 @Stateless
 @Path("/sms")
-@Api("Serviços de SMS")
+@Api("servicos")
 public class SmsResource {
 
 	@Inject
@@ -48,7 +49,7 @@ public class SmsResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@ApiOperation(value = "Serviço de envio de SMS.")
-	public Response send(SmsDTO dto) throws Exception {
+	public Response send(SentSmsDTO dto) throws Exception {
 		queueService.send(dto);
 		
 		return new Response(true);

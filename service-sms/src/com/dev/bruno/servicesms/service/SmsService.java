@@ -11,6 +11,7 @@ import org.apache.commons.beanutils.PropertyUtils;
 
 import com.dev.bruno.servicesms.dao.SmsDAO;
 import com.dev.bruno.servicesms.dto.ResultDTO;
+import com.dev.bruno.servicesms.dto.SentSmsDTO;
 import com.dev.bruno.servicesms.dto.SmsDTO;
 import com.dev.bruno.servicesms.model.Sms;
 
@@ -61,8 +62,8 @@ public class SmsService {
 		return entityToDTO(dao.get(id));
 	}
 	
-	public void send(SmsDTO dto) throws Exception {
-		Sms sms = dtoToEntity(null, null, dto);
+	public void send(SentSmsDTO dto) throws Exception {
+		Sms sms = dtoToEntity(dto);
 		
 		if(sms.getValidDate() != null && sms.getValidDate().before(new Date())) {
 			sms.setInvalidationDate(new Date());
@@ -85,18 +86,14 @@ public class SmsService {
 		return dto;
 	}
 	
-	private Sms dtoToEntity(Long id, Sms sms, SmsDTO dto) throws Exception {
-		if(sms == null) {
-			sms = new Sms();
-		}
+	private Sms dtoToEntity(SentSmsDTO dto) throws Exception {
+		Sms sms = new Sms();
 		
 		if(dto == null) {
 			return sms;
 		}
 		
 		PropertyUtils.copyProperties(sms, dto);
-		
-		sms.setId(id);
 		
 		return sms;
 	}

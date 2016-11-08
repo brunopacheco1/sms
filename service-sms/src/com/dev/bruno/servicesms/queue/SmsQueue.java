@@ -13,6 +13,7 @@ import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import javax.ejb.Singleton;
 
+import com.dev.bruno.servicesms.dto.SentSmsDTO;
 import com.dev.bruno.servicesms.dto.SmsDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -62,7 +63,7 @@ public class SmsQueue {
 		}
 	}
 	
-	public void send(SmsDTO dto) throws Exception {
+	public void send(SentSmsDTO dto) throws Exception {
 		if(dto != null) {
 			GsonBuilder builder = new GsonBuilder();
 			builder.setDateFormat("yyyy-MM-dd'T'HH:mm:ss");

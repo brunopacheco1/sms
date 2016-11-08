@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.dev.bruno.servicesms.dto.SentSmsDTO;
 import com.dev.bruno.servicesms.dto.SmsDTO;
 import com.dev.bruno.servicesms.service.ServiceLocator;
 import com.dev.bruno.servicesms.service.SmsService;
@@ -28,7 +29,7 @@ public class SmsConsumer extends DefaultConsumer {
 		GsonBuilder builder = new GsonBuilder();
 		builder.setDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		
-		SmsDTO dto = builder.create().fromJson(message, SmsDTO.class);
+		SentSmsDTO dto = builder.create().fromJson(message, SentSmsDTO.class);
 		
 		SmsService smsService = (SmsService) ServiceLocator.getInstance().lookup(SmsService.class);
 		
