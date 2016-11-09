@@ -14,6 +14,6 @@ public class AppExceptionMapper implements ExceptionMapper<AppException> {
 	public javax.ws.rs.core.Response toResponse(AppException e) {
 		Response response = new Response(e.getMessage());
 		
-		return javax.ws.rs.core.Response.status(Status.PRECONDITION_FAILED).entity(response).type(MediaType.APPLICATION_JSON).build();
+		return javax.ws.rs.core.Response.status(Status.CONFLICT).entity(response).type(MediaType.APPLICATION_JSON).build();
 	}
 }
