@@ -3,7 +3,8 @@
 Projeto RESTFul conceito de envio de SMS. Desenvolvido em Java, utilizando a especificação JavaEE 7 (JAX-RS, EJB e JPA).
 
 Ambiente de Testes:
-- SO: Ubuntu 14.04, Amazon EC2, AMI Bitnami Wildfly 9.x
+- Hardware: Amazon EC2 t1.micro de 613MB de RAM, 10GB de HD, 1 vCPU de 1.0GHz a 1.2GHz
+- SO: Ubuntu 14.04, AMI Bitnami Wildfly 9.x
 - Banco de Dados: MySQL 5.6
 - Servidor de Aplicação: Wildfly 9.0.2.Final
 - Java: 1.8
