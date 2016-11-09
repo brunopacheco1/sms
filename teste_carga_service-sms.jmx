@@ -78,8 +78,7 @@
                     <stringProp name="Argument.value">{&#xd;
 	&quot;from&quot; : &quot;+5521999112222&quot;,&#xd;
 	&quot;to&quot; : &quot;+5521999112223&quot;,&#xd;
-	&quot;body&quot; : &quot;teste teste teste&quot;,&#xd;
-	&quot;validDate&quot; : &quot;2016-12-08T00:00:00&quot;&#xd;
+	&quot;body&quot; : &quot;teste teste teste&quot;&#xd;
 }</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
