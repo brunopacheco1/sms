@@ -17,8 +17,6 @@ public class OperadoraFactoryService {
             return null;
         }
         
-        logger.info("BUSCANDO OPERADORA DO DESTINATARIO...");
-        
         Random random = new Random();
         
         OperadoraService operadoraService = null;

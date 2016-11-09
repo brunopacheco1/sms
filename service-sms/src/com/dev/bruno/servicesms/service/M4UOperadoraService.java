@@ -1,5 +1,10 @@
 package com.dev.bruno.servicesms.service;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
+
 import org.apache.commons.beanutils.PropertyUtils;
 
 import com.dev.bruno.servicesms.dto.SentSmsDTO;
@@ -12,10 +17,14 @@ public class M4UOperadoraService extends OperadoraService {
         
         PropertyUtils.copyProperties(sms, dto);
         
+        Client client = ClientBuilder.newClient();
+        
+        client.target("http://recruitment.m4u.com.br/api/v1").path("/sms").request(MediaType.APPLICATION_JSON).post(Entity.json(sms));
+        
         logger.info(String.format("M4U: Enviando SMS de %s para %s...", sms.getFrom(), sms.getTo()));
     }
     
-    private class M4USms {
+    public class M4USms {
         private String from;
         private String to;
     	private String body;
