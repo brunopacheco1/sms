@@ -8,5 +8,5 @@ public abstract class OperadoraService {
     
     protected Logger logger = Logger.getLogger(getClass().getName());
     	
-    public abstract void send(SentSmsDTO dto);
+    public abstract void send(SentSmsDTO dto) throws Exception;
 }
