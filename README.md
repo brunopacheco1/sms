@@ -12,8 +12,8 @@ Ambiente de Testes:
 - Swagger: http://ec2-54-167-228-148.compute-1.amazonaws.com/service-sms/api/swagger.yaml
 
 Deploy da aplicação:
-1 - Ter o java, servidor de aplicação, banco de dados e mensageria instalados;
-2 - Configurar no Wildfly o driver do MySQL;
-3 - Configurar no Wildfly o datasource de acesso ao banco da aplicação com o JNDI "java:/smsDS";
-4 - Criar no MySQL o banco de dados SMS;
-5 - Criar a fila "java/service/sms", com o parâmetro durable=true, no RabbitMQ-Server;
+- Ter o java, servidor de aplicação, banco de dados e mensageria instalados;
+- Configurar no Wildfly o driver do MySQL;
+- Configurar no Wildfly o datasource de acesso ao banco da aplicação com o JNDI "java:/smsDS";
+- Criar no MySQL o banco de dados SMS;
+- Criar a fila "java/service/sms", com o parâmetro durable=true, no RabbitMQ-Server;
