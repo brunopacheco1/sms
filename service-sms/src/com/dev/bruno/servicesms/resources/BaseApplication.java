@@ -12,6 +12,7 @@ public class BaseApplication extends Application {
 	public BaseApplication() {
 		BeanConfig beanConfig = new BeanConfig();
         beanConfig.setVersion("1.0");
+        beanConfig.setContact("brunopacheco1@yahoo.com");
         beanConfig.setTitle("Serviço de Envio de SMS");
         beanConfig.setDescription("Projeto RESTFul conceito de envio de SMS. Desenvolvido em Java, utilizando a especificação JavaEE 7 (JAX-RS, EJB e JPA).");
         beanConfig.setSchemes(new String[]{"http"});
