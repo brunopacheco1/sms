@@ -32,6 +32,12 @@ public class SmsDTO implements Serializable {
     @ApiModelProperty(value="Data de invalidação do SMS, caso não tenha sido enviado antes da validDate", example="2016-01-01T00:00:00")
 	private Date invalidationDate;
 
+    @ApiModelProperty(value="Data de falha de envio do SMS", example="2016-01-01T00:00:00")	
+	private Date failureDate;
+	
+    @ApiModelProperty(value="Mensagem de falha de envio do SMS", example="teste")
+	private String failureMsg;
+
 	public Long getId() {
 		return id;
 	}
@@ -87,4 +93,20 @@ public class SmsDTO implements Serializable {
 	public void setInvalidationDate(Date invalidationDate) {
 		this.invalidationDate = invalidationDate;
 	}
+	
+	public Date getFailureDate() {
+        return failureDate;
+    }
+    
+    public void setFailureDate(Date failureDate) {
+        this.failureDate = failureDate;
+    }
+    
+    public String getFailureMsg() {
+        return failureMsg;
+    }
+    
+    public void setFailureMsg(String failureMsg) {
+        this.failureMsg = failureMsg;
+    }
 }

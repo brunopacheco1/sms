@@ -3,6 +3,8 @@ package com.dev.bruno.servicesms.service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -18,6 +20,8 @@ import com.dev.bruno.servicesms.model.Sms;
 @Stateless
 public class SmsService {
 
+    private Logger logger = Logger.getLogger(getClass().getName());
+    
 	@Inject
 	private SmsDAO dao;
 	
@@ -72,9 +76,15 @@ public class SmsService {
 		} else {
             OperadoraService service = operadoraFactory.getOperadora(dto.getTo());
             
-            service.send(dto);
-            
-            sms.setSentDate(new Date());
+            try {
+                service.send(dto);
+                sms.setSentDate(new Date());                
+            } catch(Exception e) {
+                logger.log(Level.SEVERE, e.getMessage(), e);
+                
+                sms.setFailureDate(new Date());
+                sms.setFailureMsg(e.getMessage().length() > 1000 ? e.getMessage().substring(0, 1000) : e.getMessage());
+            }
 		}
 		
 		dao.add(sms);

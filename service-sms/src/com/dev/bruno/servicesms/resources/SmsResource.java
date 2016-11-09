@@ -37,10 +37,10 @@ public class SmsResource {
 	@GET
 	@ApiOperation(value = "Serviço de listagem de SMS enviados.")
 	public ResultDTO list(
-	   @ApiParam(required=false, example="teste", value="Campo de pesquisa textual nos campos: to, from, body") @QueryParam("query") String queryStr, 
+	   @ApiParam(required=false, example="teste", value="Campo de pesquisa textual nos campos: to, from, body e failureMsg") @QueryParam("query") String queryStr, 
 	   @ApiParam(required=false, example="0", defaultValue="0", value="Ponto inicial do resultado da consulta") @QueryParam("start") Integer start,
 	   @ApiParam(required=false, example="100", defaultValue="100", value="Número limite de linhas da consulta") @QueryParam("limit") Integer limit,
-	   @ApiParam(required=false, example="id", defaultValue="id", allowableValues="id,validDate,sentDate,invalidationDate", value="Campo que ordenará a consulta") @QueryParam("order") String order,
+	   @ApiParam(required=false, example="id", defaultValue="id", allowableValues="id,validDate,sentDate,invalidationDate,failureDate", value="Campo que ordenará a consulta") @QueryParam("order") String order,
 	   @ApiParam(required=false, example="asc", defaultValue="asc", allowableValues="dir,asc", value="\"Direção\" da ordenação da consulta") @QueryParam("dir") String dir) throws Exception {
 		return service.list(queryStr, start, limit, order, dir);
 	}

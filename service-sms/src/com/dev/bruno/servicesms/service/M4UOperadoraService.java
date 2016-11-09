@@ -17,8 +17,8 @@ public class M4UOperadoraService extends OperadoraService {
         
         PropertyUtils.copyProperties(sms, dto);
         
-        //Client client = ClientBuilder.newClient();
-        //client.target("http://recruitment.m4u.com.br/api/v1").path("/sms").request(MediaType.APPLICATION_JSON).put(Entity.json(sms));
+        Client client = ClientBuilder.newClient();
+        client.target("http://recruitment.m4u.com.br/api/v1").path("/sms").request(MediaType.APPLICATION_JSON).put(Entity.json(sms));
         
         logger.info(String.format("M4U: Enviando SMS de %s para %s...", sms.getFrom(), sms.getTo()));
     }

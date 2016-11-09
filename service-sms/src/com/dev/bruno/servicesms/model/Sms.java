@@ -39,6 +39,12 @@ public class Sms implements Serializable {
 	@Column(name="_INVALIDATION_DATE")
 	private Date invalidationDate;
 
+	@Column(name="_FAILURE_DATE")
+	private Date failureDate;
+	
+	@Column(name="_FAILURE_MSG", length=1000)
+	private String failureMsg;
+	
 	public Long getId() {
 		return id;
 	}
@@ -94,4 +100,20 @@ public class Sms implements Serializable {
 	public void setInvalidationDate(Date invalidationDate) {
 		this.invalidationDate = invalidationDate;
 	}
+	
+	public Date getFailureDate() {
+	    return failureDate;
+	}
+	
+	public void setFailureDate(Date failureDate) {
+        this.failureDate = failureDate;
+    }
+    
+    public String getFailureMsg() {
+        return failureMsg;
+    }
+    
+    public void setFailureMsg(String failureMsg) {
+        this.failureMsg = failureMsg;
+    }
 }
