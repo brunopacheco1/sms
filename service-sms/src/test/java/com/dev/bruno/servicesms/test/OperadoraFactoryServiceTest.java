@@ -10,22 +10,23 @@ import junit.framework.TestCase;
 
 public class OperadoraFactoryServiceTest extends TestCase {
 
-	private EJBContainer ejbContainer;
+	private EJBContainer container;
 
 	private OperadoraFactoryService service;
 
 	@Override
 	protected void setUp() throws Exception {
-		ejbContainer = EJBContainer.createEJBContainer();
-		Object object = ejbContainer.getContext().lookup("java:global/service-sms/OperadoraFactoryService");
+		container = EJBContainer.createEJBContainer();
+		Object object = container.getContext().lookup("java:global/service-sms/OperadoraFactoryService");
 		
 		assertTrue(object instanceof OperadoraFactoryService);
 
 		service = (OperadoraFactoryService) object;
-	}
+    }
 
+	@Override
 	protected void tearDown() throws Exception {
-		ejbContainer.close();
+		container.close();
 	}
 
 	@Test

@@ -11,22 +11,23 @@ import junit.framework.TestCase;
 
 public class SmsQueueTest extends TestCase {
 
-	private EJBContainer ejbContainer;
+	private EJBContainer container;
 
 	private SmsQueue queue;
 
 	@Override
 	protected void setUp() throws Exception {
-		ejbContainer = EJBContainer.createEJBContainer();
-		Object object = ejbContainer.getContext().lookup("java:global/service-sms/SmsQueue");
+		container = EJBContainer.createEJBContainer();
+		Object object = container.getContext().lookup("java:global/service-sms/SmsQueue");
 		
 		assertTrue(object instanceof SmsQueue);
 
 		queue = (SmsQueue) object;
 	}
-
+	
+	@Override
 	protected void tearDown() throws Exception {
-		ejbContainer.close();
+		container.close();
 	}
 
 	@Test(expected=AppException.class)

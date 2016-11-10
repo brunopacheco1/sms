@@ -22,7 +22,7 @@
 		</resources>
 		<finalName>service-sms</finalName>
 		<filters>
-			<filter>${basedir}/WebContent/WEB-INF/service-sms.properties</filter>
+			<filter>${basedir}/src/main/java/service-sms.properties</filter>
 		</filters>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<plugins>
@@ -71,6 +71,8 @@
 		</plugins>
 	</build>
 	<dependencies>
+	    <!-- DEPENDENCIAS PRESENTES NO SERVIDOR DE APLICACAO -->
+	    
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
@@ -78,6 +80,15 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.5.1</version>
+			<scope>provided</scope>
+		</dependency>
+		
+	    <!-- DEPENDENCIAS DO PROJETO -->
+	    
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
@@ -102,12 +113,7 @@
 			<version>1.5.10</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.5.1</version>
-			<scope>provided</scope>
-		</dependency>
+        <!-- DEPENDENCIAS DE TESTES -->
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -122,5 +128,12 @@
 			<version>4.7.4</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.193</version>
+            <scope>test</scope>
+        </dependency>
 	</dependencies>
 </project>

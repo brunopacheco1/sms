@@ -12,10 +12,12 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import javax.ejb.Singleton;
+import javax.inject.Inject;
 
 import com.dev.bruno.servicesms.dto.SentSmsDTO;
 import com.dev.bruno.servicesms.exception.AppException;
 import com.dev.bruno.servicesms.resource.JacksonConfig;
+import com.dev.bruno.servicesms.service.PropertiesService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -24,10 +26,11 @@ import com.rabbitmq.client.ConnectionFactory;
 @Singleton
 public class SmsQueue {
 
-	@Resource(lookup="msg.broker.host")
+    @Inject
+    private PropertiesService properties;
+    
 	private String host;
 	
-	@Resource(lookup="msg.broker.queue")
 	private String queue;
 	
 	private Logger logger = Logger.getLogger(getClass().getName());
@@ -39,6 +42,9 @@ public class SmsQueue {
 	@PostConstruct
 	private void connect() {
 		try {
+		    host = properties.getProperty("msg.broker.host");
+		    queue = properties.getProperty("msg.broker.queue");
+		    
 			ConnectionFactory factory = new ConnectionFactory();
 		    factory.setUri(host);
 			connection = factory.newConnection();

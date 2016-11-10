@@ -30,7 +30,7 @@ public class ServiceLocator {
 		return lookup("java:global/service-sms/" + type.getSimpleName());
 	}
 	
-	public synchronized Object lookup(String jndiName) {
+	private Object lookup(String jndiName) {
 		try {
 			return context.lookup(jndiName);
 		} catch (NamingException e) {
