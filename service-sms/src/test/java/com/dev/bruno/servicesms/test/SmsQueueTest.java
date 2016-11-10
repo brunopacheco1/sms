@@ -23,8 +23,6 @@ public class SmsQueueTest extends TestCase {
 		assertTrue(object instanceof SmsQueue);
 
 		queue = (SmsQueue) object;
-		
-		//INJETAR DEPENDENCIAS
 	}
 
 	protected void tearDown() throws Exception {
