@@ -11,10 +11,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import com.dev.bruno.servicesms.dto.ResponseDTO;
 import com.dev.bruno.servicesms.dto.ResultDTO;
 import com.dev.bruno.servicesms.dto.SentSmsDTO;
 import com.dev.bruno.servicesms.dto.SmsDTO;
-import com.dev.bruno.servicesms.response.Response;
 import com.dev.bruno.servicesms.service.SmsService;
 
 import io.swagger.annotations.Api;
@@ -36,7 +36,7 @@ public class SmsResource {
 	@ApiOperation(value = "Serviço de listagem de SMS enviados.")
 	@ApiResponses(value = {
 	    @ApiResponse(code = 200, message = "Resposta com resultado da busca.", response = ResultDTO.class),
-	    @ApiResponse(code = 500, message = "Erro não esperado.", response = Response.class)
+	    @ApiResponse(code = 500, message = "Erro não esperado.", response = ResponseDTO.class)
 	})
 	public ResultDTO list(
 	   @ApiParam(required=false, example="teste", value="Campo de pesquisa textual nos campos: to, from, body e failureMsg.") @QueryParam("query") String queryStr, 
@@ -52,7 +52,7 @@ public class SmsResource {
 	@ApiOperation(value = "Serviço de busca de SMS único.")
 	@ApiResponses(value = {
 	    @ApiResponse(code = 200, message = "SMS encontrado.", response = SmsDTO.class),
-	    @ApiResponse(code = 500, message = "Erro não esperado.", response = Response.class)
+	    @ApiResponse(code = 500, message = "Erro não esperado.", response = ResponseDTO.class)
 	})
 	public SmsDTO get(@ApiParam(required=true, example="1", value="ID do SMS.") @PathParam("id") Long id) throws Exception {
 		return service.get(id);
@@ -62,13 +62,13 @@ public class SmsResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@ApiOperation(value = "Serviço de envio de SMS.")
 	@ApiResponses(value = {
-	    @ApiResponse(code = 200, message = "SMS enviado.", response = Response.class),
-	    @ApiResponse(code = 409, message = "SMS não passou na validação de campos.", response = Response.class),
-	    @ApiResponse(code = 500, message = "Erro não esperado.", response = Response.class)
+	    @ApiResponse(code = 200, message = "SMS enviado.", response = ResponseDTO.class),
+	    @ApiResponse(code = 409, message = "SMS não passou na validação de campos.", response = ResponseDTO.class),
+	    @ApiResponse(code = 500, message = "Erro não esperado.", response = ResponseDTO.class)
 	})
-	public Response send(@ApiParam(required=true, value="SMS que será enviado.") SentSmsDTO dto) throws Exception {
+	public ResponseDTO send(@ApiParam(required=true, value="SMS que será enviado.") SentSmsDTO dto) throws Exception {
 		service.queue(dto);
 		
-		return new Response(true);
+		return new ResponseDTO(true);
 	}
 }

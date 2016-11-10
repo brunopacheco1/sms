@@ -1,19 +1,20 @@
 package com.dev.bruno.servicesms.exception;
 
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
-import com.dev.bruno.servicesms.response.Response;
+import com.dev.bruno.servicesms.dto.ResponseDTO;
 
 @Provider
 public class AppExceptionMapper implements ExceptionMapper<AppException> {
     
     @Override
-	public javax.ws.rs.core.Response toResponse(AppException e) {
-		Response response = new Response(e.getMessage());
+	public Response toResponse(AppException e) {
+		ResponseDTO response = new ResponseDTO(e.getMessage());
 		
-		return javax.ws.rs.core.Response.status(Status.CONFLICT).entity(response).type(MediaType.APPLICATION_JSON).build();
+		return Response.status(Status.CONFLICT).entity(response).type(MediaType.APPLICATION_JSON).build();
 	}
 }

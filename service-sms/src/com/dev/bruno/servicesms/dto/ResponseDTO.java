@@ -1,10 +1,10 @@
-package com.dev.bruno.servicesms.response;
+package com.dev.bruno.servicesms.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel
-public class Response {
+public class ResponseDTO {
 
 	@ApiModelProperty(value="Se a requisição foi processada com sucesso ou não.", example="false")
 	private Boolean success = false;
@@ -12,20 +12,20 @@ public class Response {
 	@ApiModelProperty(value="Mensagem de resposta, caso seja uma excepção", example="Campo não preenchido corretamente.")
 	private String message;
 
-	public Response(Boolean success, String message) {
+	public ResponseDTO(Boolean success, String message) {
 		super();
 		
 		this.success = success;
 		this.message = message;
 	}
 	
-	public Response(Boolean success) {
+	public ResponseDTO(Boolean success) {
 		super();
 		
 		this.success = success;
 	}
 	
-	public Response(String message) {
+	public ResponseDTO(String message) {
 		super();
 		
 		this.message = message;
