@@ -15,11 +15,6 @@ public class ServiceLocator {
 	}
 
 	private Context context;
-	private String appContext;
-
-	public void setAppContext(String appContext) {
-		this.appContext = appContext;
-	}
 	
 	private static ServiceLocator locator;
 	
@@ -32,7 +27,7 @@ public class ServiceLocator {
 	}
 	
 	public synchronized Object lookup(Class<?> type) {
-		return lookup("java:global/" + appContext + "/" + type.getSimpleName());
+		return lookup("java:global/service-sms/" + type.getSimpleName());
 	}
 	
 	public synchronized Object lookup(String jndiName) {
