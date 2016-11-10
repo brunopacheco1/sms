@@ -5,7 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.dev.bruno.servicesms.dto.SentSmsDTO;
-import com.dev.bruno.servicesms.resources.JacksonConfig;
+import com.dev.bruno.servicesms.resource.JacksonConfig;
 import com.dev.bruno.servicesms.service.ServiceLocator;
 import com.dev.bruno.servicesms.service.SmsService;
 import com.fasterxml.jackson.databind.ObjectMapper;

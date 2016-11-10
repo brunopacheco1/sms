@@ -1,4 +1,4 @@
-package com.dev.bruno.servicesms.resources;
+package com.dev.bruno.servicesms.resource;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -32,9 +32,6 @@ public class SmsResource {
 
 	@Inject
 	private SmsService service;
-	
-	@Inject
-	private SmsQueue queueService;
 	
 	@GET
 	@ApiOperation(value = "Serviço de listagem de SMS enviados.")
@@ -71,7 +68,7 @@ public class SmsResource {
 	    @ApiResponse(code = 500, message = "Erro não esperado.", response = Response.class)
 	})
 	public Response send(@ApiParam(required=true, value="SMS que será enviado.") SentSmsDTO dto) throws Exception {
-		queueService.send(dto);
+		service.queue(dto);
 		
 		return new Response(true);
 	}

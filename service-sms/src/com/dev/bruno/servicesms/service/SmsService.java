@@ -10,12 +10,15 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.dev.bruno.servicesms.dao.SmsDAO;
 import com.dev.bruno.servicesms.dto.ResultDTO;
 import com.dev.bruno.servicesms.dto.SentSmsDTO;
 import com.dev.bruno.servicesms.dto.SmsDTO;
+import com.dev.bruno.servicesms.exception.AppException;
 import com.dev.bruno.servicesms.model.Sms;
+import com.dev.bruno.servicesms.queue.SmsQueue;
 
 @Stateless
 public class SmsService {
@@ -24,6 +27,9 @@ public class SmsService {
     
 	@Inject
 	private SmsDAO dao;
+	
+	@Inject
+	private SmsQueue queue;
 	
 	@Inject
 	private OperadoraFactoryService operadoraFactory;
@@ -69,6 +75,8 @@ public class SmsService {
 	}
 	
 	public void send(SentSmsDTO dto) throws Exception {
+		validate(dto);
+		
 		Sms sms = dtoToEntity(dto);
 		
 		if(sms.getValidDate() != null && sms.getValidDate().before(new Date())) {
@@ -88,6 +96,31 @@ public class SmsService {
 		}
 		
 		dao.add(sms);
+	}
+	
+	public void queue(SentSmsDTO dto) throws Exception {
+		validate(dto);
+		
+		queue.publish(dto);
+	}
+
+	
+	private void validate(SentSmsDTO dto) throws AppException {
+	    if(dto == null) {
+	        throw new AppException("SMS é obrigatório.");
+	    }
+	    
+	    if(StringUtils.isBlank(dto.getTo()) || !dto.getTo().matches("^\\+\\d{13}$")) {
+	        throw new AppException("O formato do campo to deve ser o seguinte: ^\\+\\d{13}$. Ex: +5521999112222");
+		}
+		
+		if(StringUtils.isBlank(dto.getFrom()) || !dto.getFrom().matches("^\\+\\d{13}$")) {
+	        throw new AppException("O formato do campo from deve ser o seguinte: ^\\+\\d{13}$. Ex: +5521999112222");
+		}
+		
+		if(StringUtils.isBlank(dto.getBody()) || dto.getBody().length() > 160) {
+	        throw new AppException("O campo body não pode ser maior que 160 carateres.");
+		}
 	}
 	
 	private SmsDTO entityToDTO(Sms sms) throws Exception {

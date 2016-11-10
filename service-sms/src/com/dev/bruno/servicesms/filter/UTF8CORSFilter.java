@@ -1,4 +1,4 @@
-package com.dev.bruno.servicesms.filters;
+package com.dev.bruno.servicesms.filter;
 
 import java.io.IOException;
 
