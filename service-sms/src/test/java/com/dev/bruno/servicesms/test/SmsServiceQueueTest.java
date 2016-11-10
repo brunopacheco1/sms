@@ -10,9 +10,9 @@ import com.dev.bruno.servicesms.service.SmsService;
 
 import junit.framework.TestCase;
 
-public class SmsServiceTest extends TestCase {
-
-	private EJBContainer container;
+public class SmsServiceQueueTest extends TestCase {
+    
+    private EJBContainer container;
 
 	private SmsService service;
 
@@ -30,31 +30,41 @@ public class SmsServiceTest extends TestCase {
 	protected void tearDown() throws Exception {
 		container.close();
 	}
+	
+    @Test
+	public void testNull() {
+		SentSmsDTO dto = null;
+	    
+	    queue(dto);
+    }
+    
+	@Test
+	public void testEmpty() {
+	    SentSmsDTO dto = new SentSmsDTO();
+
+	    queue(dto);
+    }
 
 	@Test
-	public void testQueue() {
-	    SentSmsDTO dto = null;
-	    
-	    queue(dto);
-	    
-	    dto = new SentSmsDTO();
-
-	    queue(dto);
-	    
+	public void testToNoMatch() {
+	    SentSmsDTO dto = new SentSmsDTO();
 	    dto.setTo("5521999112222");
 
 	    queue(dto);
-	    
+	}
+
+	@Test
+	public void testFromNoMatch() {
+	    SentSmsDTO dto = new SentSmsDTO();    
 	    dto.setTo("+5521999112222");
 	    dto.setFrom("5521999112222");
 	    
 	    queue(dto);
-	    
-	    dto.setTo("+5521999112222");
-	    dto.setFrom("+5521999112222");
-	    
-	    queue(dto);
-	    
+	}
+
+	@Test
+	public void testBodyNoMatch() {
+	    SentSmsDTO dto = new SentSmsDTO();    
 	    dto.setTo("+5521999112222");
 	    dto.setFrom("+5521999112222");
 	    dto.setBody("ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt");
@@ -64,46 +74,7 @@ public class SmsServiceTest extends TestCase {
 	
 	private void queue(SentSmsDTO dto) {
 	    try {
-		    service.queue(null);
-		} catch(Exception e) {
-		    assertTrue(e instanceof AppException);
-		}
-	}
-	
-	@Test
-	public void testSend() {
-		SentSmsDTO dto = null;
-	    
-	    send(dto);
-	    
-	    dto = new SentSmsDTO();
-
-	    send(dto);
-	    
-	    dto.setTo("5521999112222");
-
-	    send(dto);
-	    
-	    dto.setTo("+5521999112222");
-	    dto.setFrom("5521999112222");
-	    
-	    send(dto);
-	    
-	    dto.setTo("+5521999112222");
-	    dto.setFrom("+5521999112222");
-	    
-	    send(dto);
-	    
-	    dto.setTo("+5521999112222");
-	    dto.setFrom("+5521999112222");
-	    dto.setBody("ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt");
-	    
-        send(dto);
-	}
-	
-	private void send(SentSmsDTO dto) {
-	    try {
-		    service.send(null);
+		    service.queue(dto);
 		} catch(Exception e) {
 		    assertTrue(e instanceof AppException);
 		}
