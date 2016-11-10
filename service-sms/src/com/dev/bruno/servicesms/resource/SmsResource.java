@@ -14,15 +14,14 @@ import javax.ws.rs.core.MediaType;
 import com.dev.bruno.servicesms.dto.ResultDTO;
 import com.dev.bruno.servicesms.dto.SentSmsDTO;
 import com.dev.bruno.servicesms.dto.SmsDTO;
-import com.dev.bruno.servicesms.queue.SmsQueue;
 import com.dev.bruno.servicesms.response.Response;
 import com.dev.bruno.servicesms.service.SmsService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @Produces(MediaType.APPLICATION_JSON)
 @Stateless
