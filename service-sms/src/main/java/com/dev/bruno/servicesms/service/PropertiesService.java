@@ -1,7 +1,8 @@
 package com.dev.bruno.servicesms.service;
 
+import java.io.InputStream;
+import java.util.Properties;
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.ejb.Singleton;
 
 @Singleton
@@ -10,7 +11,7 @@ public class PropertiesService {
     private Properties props;
     
     @PostConstruct
-	private void load() {
+	private void load() throws Exception {
 	    InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("service-sms.properties");
 	    
 	    props = new Properties();

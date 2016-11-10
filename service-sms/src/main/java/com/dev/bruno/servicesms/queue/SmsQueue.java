@@ -10,7 +10,6 @@ import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.annotation.Resource;
 import javax.ejb.Singleton;
 import javax.inject.Inject;
 
@@ -70,7 +69,7 @@ public class SmsQueue {
 	}
 	
 	public void publish(SentSmsDTO dto) throws Exception {
-		if(dto != null) {
+		if(dto == null) {
 			throw new AppException("Sms nulo.");
 		}
 		

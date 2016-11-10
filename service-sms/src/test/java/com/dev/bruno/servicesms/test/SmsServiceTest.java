@@ -4,6 +4,7 @@ import javax.ejb.embeddable.EJBContainer;
 
 import org.junit.Test;
 
+import com.dev.bruno.servicesms.dto.SentSmsDTO;
 import com.dev.bruno.servicesms.exception.AppException;
 import com.dev.bruno.servicesms.service.SmsService;
 
@@ -23,8 +24,6 @@ public class SmsServiceTest extends TestCase {
 		assertTrue(object instanceof SmsService);
 
 		service = (SmsService) object;
-		
-		//INJETAR DEPENDENCIAS
 	}
 	
 	@Override
@@ -32,13 +31,81 @@ public class SmsServiceTest extends TestCase {
 		container.close();
 	}
 
-	/*@Test(expected=AppException.class)
-	public void testQueueSmsNulo() throws Exception {
-		service.queue(null);
+	@Test
+	public void testQueue() {
+	    SentSmsDTO dto = null;
+	    
+	    queue(dto);
+	    
+	    dto = new SentSmsDTO();
+
+	    queue(dto);
+	    
+	    dto.setTo("5521999112222");
+
+	    queue(dto);
+	    
+	    dto.setTo("+5521999112222");
+	    dto.setFrom("5521999112222");
+	    
+	    queue(dto);
+	    
+	    dto.setTo("+5521999112222");
+	    dto.setFrom("+5521999112222");
+	    
+	    queue(dto);
+	    
+	    dto.setTo("+5521999112222");
+	    dto.setFrom("+5521999112222");
+	    dto.setBody("ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt");
+	    
+        queue(dto);
 	}
 	
-	@Test(expected=AppException.class)
-	public void testSendSmsNulo() throws Exception {
-		service.send(null);
-	}*/
+	private void queue(SentSmsDTO dto) {
+	    try {
+		    service.queue(null);
+		} catch(Exception e) {
+		    assertTrue(e instanceof AppException);
+		}
+	}
+	
+	@Test
+	public void testSend() {
+		SentSmsDTO dto = null;
+	    
+	    send(dto);
+	    
+	    dto = new SentSmsDTO();
+
+	    send(dto);
+	    
+	    dto.setTo("5521999112222");
+
+	    send(dto);
+	    
+	    dto.setTo("+5521999112222");
+	    dto.setFrom("5521999112222");
+	    
+	    send(dto);
+	    
+	    dto.setTo("+5521999112222");
+	    dto.setFrom("+5521999112222");
+	    
+	    send(dto);
+	    
+	    dto.setTo("+5521999112222");
+	    dto.setFrom("+5521999112222");
+	    dto.setBody("ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt");
+	    
+        send(dto);
+	}
+	
+	private void send(SentSmsDTO dto) {
+	    try {
+		    service.send(null);
+		} catch(Exception e) {
+		    assertTrue(e instanceof AppException);
+		}
+	}
 }

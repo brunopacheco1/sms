@@ -10,11 +10,11 @@ import com.dev.bruno.servicesms.queue.SmsQueue;
 import junit.framework.TestCase;
 
 public class SmsQueueTest extends TestCase {
-
-	private EJBContainer container;
+    
+    private EJBContainer container;
 
 	private SmsQueue queue;
-
+	
 	@Override
 	protected void setUp() throws Exception {
 		container = EJBContainer.createEJBContainer();
@@ -23,15 +23,19 @@ public class SmsQueueTest extends TestCase {
 		assertTrue(object instanceof SmsQueue);
 
 		queue = (SmsQueue) object;
-	}
-	
-	@Override
+    }
+    
+    @Override
 	protected void tearDown() throws Exception {
 		container.close();
 	}
-
-	@Test(expected=AppException.class)
-	public void testPublish() throws Exception {
-		queue.publish(null);
+	
+	@Test
+	public void testPublish() {
+		try {
+		    queue.publish(null);		    
+		} catch(Exception e) {
+		    assertTrue(e instanceof AppException);
+		}
 	}
 }

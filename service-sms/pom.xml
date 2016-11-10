@@ -62,7 +62,7 @@
 					<password>ecad123</password>
 				</configuration>
 			</plugin>
-
+        
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -122,17 +122,10 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>org.apache.openejb</groupId>
-			<artifactId>openejb-core</artifactId>
-			<version>4.7.4</version>
-			<scope>test</scope>
-		</dependency>
-		
-		<dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.193</version>
+        <dependency>
+            <groupId>org.apache.openejb</groupId>
+            <artifactId>tomee-embedded</artifactId>
+            <version>1.7.4</version>
             <scope>test</scope>
         </dependency>
 	</dependencies>
