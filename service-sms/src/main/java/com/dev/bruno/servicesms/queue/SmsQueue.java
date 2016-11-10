@@ -14,6 +14,7 @@ import javax.annotation.Resource;
 import javax.ejb.Singleton;
 
 import com.dev.bruno.servicesms.dto.SentSmsDTO;
+import com.dev.bruno.servicesms.exception.AppException;
 import com.dev.bruno.servicesms.resource.JacksonConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.Channel;
@@ -63,6 +64,10 @@ public class SmsQueue {
 	}
 	
 	public void publish(SentSmsDTO dto) throws Exception {
+		if(dto != null) {
+			throw new AppException("Sms nulo.");
+		}
+		
 	    ObjectMapper mapper = JacksonConfig.getObjectMapper();
 	
 	    channel.basicPublish("", queue, null, mapper.writeValueAsString(dto).getBytes());	

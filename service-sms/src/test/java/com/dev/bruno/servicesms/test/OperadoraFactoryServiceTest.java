@@ -8,7 +8,7 @@ import com.dev.bruno.servicesms.service.OperadoraFactoryService;
 
 import junit.framework.TestCase;
 
-public class OperadoraTest extends TestCase {
+public class OperadoraFactoryServiceTest extends TestCase {
 
 	private EJBContainer ejbContainer;
 
