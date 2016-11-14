@@ -1,7 +1,5 @@
 package com.dev.bruno.servicesms.test;
 
-import java.util.Properties;
-
 import javax.ejb.embeddable.EJBContainer;
 
 import org.junit.Test;
