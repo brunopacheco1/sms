@@ -74,7 +74,7 @@ public class SmsServiceSendTest extends TestCase {
 	
 	private void send(SentSmsDTO dto) {
 	    try {
-		    service.send(null);
+		    service.send(dto);
 		} catch(Exception e) {
 		    assertTrue(e instanceof AppException);
 		}
