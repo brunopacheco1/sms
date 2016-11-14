@@ -1,9 +1,12 @@
 package com.dev.bruno.servicesms.test;
 
+import java.util.Properties;
+
 import javax.ejb.embeddable.EJBContainer;
 
 import org.junit.Test;
 
+import com.dev.bruno.servicesms.dto.ResultDTO;
 import com.dev.bruno.servicesms.dto.SentSmsDTO;
 import com.dev.bruno.servicesms.exception.AppException;
 import com.dev.bruno.servicesms.service.SmsService;
@@ -70,6 +73,27 @@ public class SmsServiceSendTest extends TestCase {
 	    dto.setBody("ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt");
 	    
         send(dto);
+	}
+	
+	@Test
+	public void testSend() throws Exception {
+	    SentSmsDTO dto = new SentSmsDTO();    
+	    dto.setTo("+5521999112222");
+	    dto.setFrom("+5521999112222");
+	    dto.setBody("TESTE BODY 123456789");
+	 
+	    send(dto);
+
+	    ResultDTO result = service.list("TESTE BODY 123456789", 0, 1, "id", "asc");
+	   
+        assertTrue(result.getTotalSize() == 1l);
+	}
+	
+	@Test
+	public void testList() throws Exception {
+	    ResultDTO result = service.list("NADA PRA ACHAR", 0, 1, "id", "asc");
+	    
+	    assertTrue(result.getTotalSize() == 0l);
 	}
 	
 	private void send(SentSmsDTO dto) {

@@ -18,31 +18,31 @@ public class Sms implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="_ID", nullable=false)
+	@Column(name="ID_", nullable=false)
 	private Long id;
 	
-	@Column(name="_FROM", nullable=false, length=20)
+	@Column(name="FROM_", nullable=false, length=20)
 	private String from;
 	
-	@Column(name="_TO", nullable=false, length=20)
+	@Column(name="TO_", nullable=false, length=20)
 	private String to;
 	
-	@Column(name="_BODY", nullable=false, length=160)
+	@Column(name="BODY_", nullable=false, length=160)
 	private String body;
 	
-	@Column(name="_VALID_DATE")
+	@Column(name="VALID_DATE_")
 	private Date validDate;
 	
-	@Column(name="_SENT_DATE")
+	@Column(name="SENT_DATE_")
 	private Date sentDate;
 	
-	@Column(name="_INVALIDATION_DATE")
+	@Column(name="INVALIDATION_DATE_")
 	private Date invalidationDate;
 
-	@Column(name="_FAILURE_DATE")
+	@Column(name="FAILURE_DATE_")
 	private Date failureDate;
 	
-	@Column(name="_FAILURE_MSG", length=1000)
+	@Column(name="FAILURE_MSG_", length=1000)
 	private String failureMsg;
 	
 	public Long getId() {

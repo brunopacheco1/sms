@@ -22,7 +22,7 @@ import com.dev.bruno.servicesms.model.Sms;
 @Stateless
 public class SmsDAO {
 
-	@PersistenceContext
+	@PersistenceContext(name="sms-unit")
 	protected EntityManager manager;
 	
 	private Set<String> orderOptions;
@@ -95,7 +95,7 @@ public class SmsDAO {
 					hql.append(" or ");
 				}
 				
-				hql.append("upper(s.").append(queryOption).append(") like upper(:").append(queryOption).append(")");
+				hql.append("s.").append(queryOption).append(" like :").append(queryOption);
 				
 				first = false;
 			}
@@ -135,7 +135,7 @@ public class SmsDAO {
 					hql.append(" or ");
 				}
 				
-				hql.append("upper(s.").append(queryOption).append(") like upper(:").append(queryOption).append(")");
+				hql.append("s.").append(queryOption).append(" like :").append(queryOption);
 				
 				first = false;
 			}
